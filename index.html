@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Guitar Scale/Chord Badge</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="title">
+        <div class="h1" id="titleLine">C Major (Ionian)</div>
+        <div class="sub">노션 임베드용 기타 프렛보드 배지</div>
+      </div>
+    </header>
+
+    <main class="panel">
+      <section class="fretboard" aria-label="fretboard">
+        <div class="fb-head">
+          <div class="legend">
+            <span class="dot root"></span><span class="lg">Root</span>
+            <span class="dot in"></span><span class="lg">Notes</span>
+          </div>
+          <div class="range">
+            <label for="maxFret">프렛</label>
+            <input id="maxFret" type="range" min="12" max="24" step="1" value="12" />
+            <span id="maxFretLabel">0–12</span>
+          </div>
+        </div>
+
+        <div id="fbGrid" class="fb-grid" role="img" aria-label="Guitar fretboard grid"></div>
+
+        <div class="fretnums" id="fretNums"></div>
+      </section>
+
+      <section class="controls">
+        <div class="ctl">
+          <label for="rootSel">루트 음</label>
+          <select id="rootSel"></select>
+        </div>
+
+        <div class="ctl">
+          <label for="scaleSel">스케일 종류</label>
+          <select id="scaleSel"></select>
+        </div>
+
+        <div class="ctl">
+          <label>모드</label>
+          <div class="seg">
+            <button id="modeScale" class="seg-btn active" type="button">스케일</button>
+            <button id="modeChord" class="seg-btn" type="button">코드</button>
+          </div>
+          <div class="hint" id="modeHint">스케일의 모든 구성음을 표시합니다.</div>
+        </div>
+
+        <div class="ctl">
+          <label>음이름 표기</label>
+          <div class="toggle">
+            <input id="showNames" type="checkbox" checked />
+            <label for="showNames">표시</label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span class="tiny">Standard tuning (EADGBE) · Right-handed default</span>
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
