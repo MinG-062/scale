@@ -309,7 +309,7 @@
 
   // Standard tuning, 6 strings: low E -> high E
   // (Right-handed default, but fretboard 표시 자체는 좌/우손 옵션 없이 동일하게 쓸 수 있음)
-  const TUNING = ["E","A","D","G","B","E"].map(noteToPc);
+  const TUNING = ["E","B","G","D","A","E"].map(noteToPc); // 1→6
 
   // Scale definitions: semitone intervals from root
   const SCALES = [
@@ -434,28 +434,34 @@
     fbGrid.style.gap = "0";
 
     for (let s = 0; s < 6; s++) {
-      const row = document.createElement("div");
-      row.className = "row";
-      row.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  const stringIndex = 5 - s; // 🔥 핵심: 위=1번줄, 아래=6번줄
 
-      for (let f = 0; f <= state.maxFret; f++) {
-        const cell = document.createElement("div");
-        cell.className = "cell " + (f === 0 ? "nut" : "fret");
+  const row = document.createElement("div");
+  row.className = "row";
+  row.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
-        const pc = (TUNING[s] + f) % 12;
-        if (activeSet.has(pc)) {
-          const note = document.createElement("div");
-          const isRoot = pc === rootPc;
-          note.className = "note " + (isRoot ? "root" : "in") + (state.showNames ? "" : " nolabel");
-          note.textContent = pcToNote(pc);
-          cell.appendChild(note);
-        }
+  for (let f = 0; f <= state.maxFret; f++) {
+    const cell = document.createElement("div");
+    cell.className = "cell " + (f === 0 ? "nut" : "fret");
 
-        row.appendChild(cell);
-      }
+    const pc = (TUNING[stringIndex] + f) % 12;
 
-      fbGrid.appendChild(row);
+    if (activeSet.has(pc)) {
+      const note = document.createElement("div");
+      const isRoot = pc === rootPc;
+      note.className =
+        "note " + (isRoot ? "root" : "in") +
+        (state.showNames ? "" : " nolabel");
+      note.textContent = pcToNote(pc);
+      cell.appendChild(note);
     }
+
+    row.appendChild(cell);
+  }
+
+  fbGrid.appendChild(row);
+}
+
 
     buildFretNums(state.maxFret);
     maxFretLabel.textContent = `0–${state.maxFret}`;
