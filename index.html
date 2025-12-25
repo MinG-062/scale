@@ -40,4 +40,471 @@
       align-items:flex-end;
       justify-content:space-between;
       gap:14px;
-      mar
+      margin-bottom:12px;
+    }
+    .title .h1{
+      font-size:20px;
+      font-weight:750;
+      letter-spacing:.2px;
+    }
+    .title .sub{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    .panel{
+      display:grid;
+      grid-template-columns: 1.6fr .9fr;
+      gap:14px;
+    }
+    @media (max-width: 860px){
+      .panel{ grid-template-columns: 1fr; }
+    }
+
+    .fretboard{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), transparent 40%), var(--card2);
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:12px 12px 10px;
+      overflow:hidden;
+    }
+    .fb-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .legend{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      color:var(--muted);
+      flex-wrap:wrap;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      display:inline-block;
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .dot.root{ background:var(--root); }
+    .dot.in{ background:var(--dot); }
+    .lg{ margin-right:10px; }
+
+    .range{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .range input{ width:180px; }
+
+    .fb-grid{
+      border:1px solid var(--line);
+      border-radius: 12px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.035), transparent 60%),
+        linear-gradient(90deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    }
+    .row{
+      display:grid;
+      grid-auto-flow:column;
+      border-top:1px solid var(--line);
+    }
+    .row:first-child{ border-top:none; }
+    .cell{
+      position:relative;
+      min-height:46px;
+      border-left:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .cell:first-child{ border-left:none; }
+    .cell.nut{ background: rgba(255,255,255,.04); }
+    .cell.nut:after{
+      content:"";
+      position:absolute;
+      right:-1px; top:0; bottom:0;
+      width:3px;
+      background: rgba(255,255,255,.22);
+    }
+
+    .note{
+      width:28px;height:28px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:750;
+      font-size:12px;
+      border:1px solid rgba(255,255,255,.20);
+      box-shadow: 0 8px 14px rgba(0,0,0,.35);
+      user-select:none;
+      letter-spacing:.2px;
+    }
+    .note.in{
+      background: rgba(139,211,255,.18);
+      color: rgba(255,255,255,.92);
+    }
+    .note.root{
+      background: rgba(255,121,198,.20);
+      border-color: rgba(255,121,198,.55);
+    }
+    .note.nolabel{ color:transparent; }
+
+    .fretnums{
+      display:grid;
+      grid-auto-flow:column;
+      margin-top:10px;
+      font-size:11px;
+      color:var(--muted);
+    }
+    .fretnums span{
+      text-align:center;
+      padding:2px 0 0;
+    }
+
+    .controls{
+      background: linear-gradient(180deg, rgba(255,255,255,.04), transparent 45%), var(--card);
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:12px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .ctl label{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    select{
+      width:100%;
+      padding:10px 10px;
+      border-radius: 12px;
+      border:1px solid var(--line2);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline:none;
+    }
+    .seg{
+      display:flex;
+      gap:8px;
+    }
+    .seg-btn{
+      flex:1;
+      padding:10px 10px;
+      border-radius: 12px;
+      border:1px solid var(--line2);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .seg-btn.active{
+      border-color: rgba(110,168,255,.70);
+      background: rgba(110,168,255,.18);
+    }
+    .hint{
+      margin-top:8px;
+      font-size:12px;
+      color: var(--muted);
+    }
+    .toggle{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 10px;
+      border-radius: 12px;
+      border:1px solid var(--line2);
+      background: rgba(0,0,0,.18);
+    }
+    .toggle input{ transform: scale(1.05); }
+    .foot{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:11px;
+      padding:0 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="title">
+        <div class="h1" id="titleLine">C Major (Ionian)</div>
+        <div class="sub">노션 임베드용 기타 스케일/코드 배지</div>
+      </div>
+    </header>
+
+    <main class="panel">
+      <section class="fretboard">
+        <div class="fb-head">
+          <div class="legend">
+            <span class="dot root"></span><span class="lg">Root</span>
+            <span class="dot in"></span><span class="lg">Notes</span>
+          </div>
+          <div class="range">
+            <label for="maxFret">프렛</label>
+            <input id="maxFret" type="range" min="12" max="24" step="1" value="12" />
+            <span id="maxFretLabel">0–12</span>
+          </div>
+        </div>
+
+        <div id="fbGrid" class="fb-grid"></div>
+        <div class="fretnums" id="fretNums"></div>
+      </section>
+
+      <section class="controls">
+        <div class="ctl">
+          <label for="rootSel">루트 음</label>
+          <select id="rootSel"></select>
+        </div>
+
+        <div class="ctl">
+          <label for="scaleSel">스케일 종류</label>
+          <select id="scaleSel"></select>
+        </div>
+
+        <div class="ctl">
+          <label>모드</label>
+          <div class="seg">
+            <button id="modeScale" class="seg-btn active" type="button">스케일</button>
+            <button id="modeChord" class="seg-btn" type="button">코드</button>
+          </div>
+          <div class="hint" id="modeHint">스케일의 모든 구성음을 표시합니다.</div>
+        </div>
+
+        <div class="ctl">
+          <label>음이름 표기</label>
+          <div class="toggle">
+            <input id="showNames" type="checkbox" checked />
+            <label for="showNames">표시</label>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Standard tuning (EADGBE) · Right-handed default
+    </footer>
+  </div>
+
+<script>
+(() => {
+  // ======== Music helpers ========
+  // Use sharps only for simplicity (Notion badge 목적이면 이게 제일 안정적)
+  const NOTE_NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+  const noteToPc = (name) => NOTE_NAMES.indexOf(name);
+  const pcToNote = (pc) => NOTE_NAMES[(pc + 1200) % 12];
+
+  // Standard tuning, 6 strings: low E -> high E
+  // (Right-handed default, but fretboard 표시 자체는 좌/우손 옵션 없이 동일하게 쓸 수 있음)
+  const TUNING = ["E","A","D","G","B","E"].map(noteToPc);
+
+  // Scale definitions: semitone intervals from root
+  const SCALES = [
+    { id:"ionian",  label:"Major (Ionian)",       intervals:[0,2,4,5,7,9,11], modeName:"Ionian" },
+    { id:"dorian",  label:"Dorian",              intervals:[0,2,3,5,7,9,10], modeName:"Dorian" },
+    { id:"phryg",   label:"Phrygian",            intervals:[0,1,3,5,7,8,10], modeName:"Phrygian" },
+    { id:"lyd",     label:"Lydian",              intervals:[0,2,4,6,7,9,11], modeName:"Lydian" },
+    { id:"mixo",    label:"Mixolydian",          intervals:[0,2,4,5,7,9,10], modeName:"Mixolydian" },
+    { id:"aeol",    label:"Minor (Aeolian)",     intervals:[0,2,3,5,7,8,10], modeName:"Aeolian" },
+    { id:"locr",    label:"Locrian",             intervals:[0,1,3,5,6,8,10], modeName:"Locrian" },
+    { id:"pentaM",  label:"Major Pentatonic",    intervals:[0,2,4,7,9],      modeName:"Maj Pent" },
+    { id:"penta",   label:"Minor Pentatonic",    intervals:[0,3,5,7,10],     modeName:"Min Pent" },
+    { id:"blues",   label:"Blues",               intervals:[0,3,5,6,7,10],   modeName:"Blues" },
+  ];
+
+  // In "Chord" mode: show 1-3-5 based on the chosen scale degrees (root, 3rd, 5th)
+  // For pentatonic/blues, pick musically common chord tones:
+  // - Major pent: 1-3-5
+  // - Minor pent/blues: 1-b3-5
+  const chordTonesFromScale = (scale) => {
+    const ints = scale.intervals.slice().sort((a,b)=>a-b);
+    const isMajorish = scale.id === "ionian" || scale.id === "lyd" || scale.id === "mixo" || scale.id === "pentaM";
+    const isMinorish = scale.id === "aeol" || scale.id === "dorian" || scale.id === "phryg" || scale.id === "penta" || scale.id === "blues";
+    if (ints.length >= 5) {
+      if (scale.id === "blues" || scale.id === "penta") return [0,3,7]; // 1 b3 5
+      if (scale.id === "pentaM") return [0,4,7]; // 1 3 5
+      // Diatonic heptatonic: use degrees 1,3,5 => intervals[0], intervals[2], intervals[4]
+      return [ints[0], ints[2], ints[4]];
+    }
+    // fallback
+    return isMajorish ? [0,4,7] : (isMinorish ? [0,3,7] : [0,4,7]);
+  };
+
+  // ======== DOM ========
+  const elTitle = document.getElementById("titleLine");
+  const fbGrid = document.getElementById("fbGrid");
+  const fretNums = document.getElementById("fretNums");
+
+  const rootSel = document.getElementById("rootSel");
+  const scaleSel = document.getElementById("scaleSel");
+  const showNames = document.getElementById("showNames");
+
+  const modeScaleBtn = document.getElementById("modeScale");
+  const modeChordBtn = document.getElementById("modeChord");
+  const modeHint = document.getElementById("modeHint");
+
+  const maxFret = document.getElementById("maxFret");
+  const maxFretLabel = document.getElementById("maxFretLabel");
+
+  // ======== State ========
+  const state = {
+    root: "C",
+    scaleId: "ionian",
+    mode: "scale", // "scale" | "chord"
+    showNames: true,
+    maxFret: 12
+  };
+
+  // ======== Init selects ========
+  const ROOT_OPTIONS = NOTE_NAMES; // sharps only
+  ROOT_OPTIONS.forEach(n => {
+    const opt = document.createElement("option");
+    opt.value = n;
+    opt.textContent = n;
+    rootSel.appendChild(opt);
+  });
+
+  SCALES.forEach(s => {
+    const opt = document.createElement("option");
+    opt.value = s.id;
+    opt.textContent = s.label;
+    scaleSel.appendChild(opt);
+  });
+
+  // ======== Render helpers ========
+  function buildFretNums(maxF) {
+    fretNums.innerHTML = "";
+    // nut column + frets 0..maxF
+    // visually: first column corresponds to open string (nut), then fret 1..maxF
+    const totalCols = maxF + 1; // 0..maxF
+    for (let f = 0; f <= maxF; f++) {
+      const sp = document.createElement("span");
+      sp.textContent = (f === 0) ? "0" : String(f);
+      sp.style.display = "block";
+      sp.style.width = "100%";
+      fretNums.appendChild(sp);
+    }
+    fretNums.style.gridTemplateColumns = `repeat(${totalCols}, 1fr)`;
+  }
+
+  function updateTitle() {
+    const root = state.root;
+    const scale = SCALES.find(s => s.id === state.scaleId);
+    const modeSuffix = state.mode === "scale" ? "" : " (Chord)";
+    elTitle.textContent = `${root} ${scale.label}${modeSuffix}`;
+  }
+
+  function render() {
+    updateTitle();
+
+    const rootPc = noteToPc(state.root);
+    const scale = SCALES.find(s => s.id === state.scaleId);
+
+    const scaleSet = new Set(scale.intervals.map(i => (rootPc + i) % 12));
+
+    let activeSet = scaleSet;
+    let hintText = "스케일의 모든 구성음을 표시합니다.";
+
+    if (state.mode === "chord") {
+      const chordInts = chordTonesFromScale(scale);
+      activeSet = new Set(chordInts.map(i => (rootPc + i) % 12));
+      hintText = "선택한 스케일을 기준으로 루트의 1-3-5 코드톤만 표시합니다.";
+    }
+    modeHint.textContent = hintText;
+
+    // grid: 6 rows(strings) x (maxFret+1) columns(open to maxFret)
+    const cols = state.maxFret + 1;
+
+    fbGrid.innerHTML = "";
+    fbGrid.style.display = "grid";
+    fbGrid.style.gridTemplateRows = `repeat(6, 1fr)`;
+    fbGrid.style.gap = "0";
+
+    for (let s = 0; s < 6; s++) {
+      const row = document.createElement("div");
+      row.className = "row";
+      row.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+
+      for (let f = 0; f <= state.maxFret; f++) {
+        const cell = document.createElement("div");
+        cell.className = "cell " + (f === 0 ? "nut" : "fret");
+
+        const pc = (TUNING[s] + f) % 12;
+        if (activeSet.has(pc)) {
+          const note = document.createElement("div");
+          const isRoot = pc === rootPc;
+          note.className = "note " + (isRoot ? "root" : "in") + (state.showNames ? "" : " nolabel");
+          note.textContent = pcToNote(pc);
+          cell.appendChild(note);
+        }
+
+        row.appendChild(cell);
+      }
+
+      fbGrid.appendChild(row);
+    }
+
+    buildFretNums(state.maxFret);
+    maxFretLabel.textContent = `0–${state.maxFret}`;
+  }
+
+  // ======== Events ========
+  rootSel.value = state.root;
+  scaleSel.value = state.scaleId;
+  showNames.checked = state.showNames;
+  maxFret.value = String(state.maxFret);
+
+  rootSel.addEventListener("change", () => {
+    state.root = rootSel.value;
+    render();
+  });
+
+  scaleSel.addEventListener("change", () => {
+    state.scaleId = scaleSel.value;
+    render();
+  });
+
+  showNames.addEventListener("change", () => {
+    state.showNames = showNames.checked;
+    render();
+  });
+
+  maxFret.addEventListener("input", () => {
+    state.maxFret = Number(maxFret.value);
+    render();
+  });
+
+  function setMode(m){
+    state.mode = m;
+    if (m === "scale"){
+      modeScaleBtn.classList.add("active");
+      modeChordBtn.classList.remove("active");
+    } else {
+      modeChordBtn.classList.add("active");
+      modeScaleBtn.classList.remove("active");
+    }
+    render();
+  }
+
+  modeScaleBtn.addEventListener("click", () => setMode("scale"));
+  modeChordBtn.addEventListener("click", () => setMode("chord"));
+
+  // initial render
+  render();
+})();
+</script>
+</body>
+</html>
